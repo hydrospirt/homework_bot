@@ -1,11 +1,14 @@
-...
+import os
+import telegram
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
 
-PRACTICUM_TOKEN = ...
-TELEGRAM_TOKEN = ...
-TELEGRAM_CHAT_ID = ...
+PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 RETRY_PERIOD = 600
 ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
@@ -20,22 +23,27 @@ HOMEWORK_VERDICTS = {
 
 
 def check_tokens():
+    """Проверяет доступность переменных окружения."""
     ...
 
 
 def send_message(bot, message):
+    """Отправляет сообщение в Telegram чат."""
     ...
 
 
 def get_api_answer(timestamp):
+    """Делает запрос к единственному эндпоинту API-сервиса."""
     ...
 
 
 def check_response(response):
+    """Проверяет ответ API на соответствие документации. """
     ...
 
 
 def parse_status(homework):
+    """Извлекает из информации о конкретной домашней работе статус этой работы."""
     ...
 
     return f'Изменился статус проверки работы "{homework_name}". {verdict}'
