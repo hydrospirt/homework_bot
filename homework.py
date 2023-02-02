@@ -80,7 +80,8 @@ def check_response(response):
     """Проверяет ответ API на соответствие документации."""
     if not isinstance(response, dict):
         logger.error(
-            'В ответе API структура данных не соответствует ожиданиям: получен список вместо ожидаемого словаря.'
+            'В ответе API структура данных не соответствует ожиданиям:',
+            'получен список вместо ожидаемого словаря.'
         )
         raise TypeError
     homeworks = response.get('homeworks')
@@ -99,7 +100,10 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Извлекает из информации о конкретной домашней работе статус этой работы."""
+    """Извлекает из информации в ответе.
+    О конкретной домашней работе статус
+    этой работы.
+    """
     keys = ['homework_name', 'status']
     for i in keys:
         if i not in homework:
