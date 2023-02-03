@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import logging
+from typing import Any
 from logging.handlers import RotatingFileHandler
 
 import requests
@@ -33,7 +34,7 @@ HOMEWORK_VERDICTS = {
 }
 
 
-def init_logger():
+def init_logger() -> Any:
     """Инициализирует настройки Logger."""
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
@@ -60,7 +61,7 @@ def check_tokens() -> bool:
     return all([PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID])
 
 
-def send_message(bot, message: str) -> None:
+def send_message(bot: Any, message: str) -> None:
     """Отправляет сообщение в Telegram чат."""
     try:
         bot.send_message(TELEGRAM_CHAT_ID, message)
@@ -83,17 +84,9 @@ def get_api_answer(timestamp: int) -> dict:
     except Exception as error:
         logging.error(f'Ошибка при запросе к API-сервису: {error}')
         raise Exception
-
-    def is_json(myjson: dict) -> bool:
-        try:
-            json.dumps(myjson)
-        except ValueError:
-            return False
-        return True
-
-    if is_json(response.json()):
+    try:
         return response.json()
-    else:
+    except ValueError:
         raise JSONResponseError
 
 
