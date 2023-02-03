@@ -6,7 +6,6 @@ from typing import Any
 from logging.handlers import RotatingFileHandler
 
 import requests
-import json
 import telegram
 
 from dotenv import load_dotenv
